@@ -29,6 +29,15 @@ http {
 
     real_ip_recursive   on;
 
+    dyups_upstream_conf  upstream.conf;
+    include upstream.conf;
+    server {
+        listen 81;
+        location / {
+            dyups_interface;
+        }
+    }
+
     {{/* databases used to determine the country depending on the client IP address */}}
     {{/* http://nginx.org/en/docs/http/ngx_http_geoip_module.html */}}
     {{/* this is require to calculate traffic for individual country using GeoIP in the status page */}}

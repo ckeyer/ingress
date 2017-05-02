@@ -12,13 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM gcr.io/google_containers/nginx-slim:0.15
+FROM alpine:edge
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
-  diffutils \
-  --no-install-recommends \
-  && rm -rf /var/lib/apt/lists/*
+ADD https://github.com/alibaba/tengine/archive/tengine-2.2.0.zip . 
+
+# TODO
 
 COPY . /
 
-CMD ["/nginx-ingress-controller"]
+CMD ["/tengine-ingress-controller"]
